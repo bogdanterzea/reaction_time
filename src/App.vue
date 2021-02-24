@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="retardedDetected">
     <h1>Reacton Timer</h1>
     <button @click="start" :disabled="isPlaying">PLAY!</button>
     <Block v-if="isPlaying" :delay="delay" @endGame="endGame"/>
