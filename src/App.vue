@@ -1,16 +1,19 @@
 <template>
-  <h1>Reacton Timer</h1>
-  <button @click="start" :disabled="isPlaying">PLAY!</button>
-  <Block v-if="isPlaying" :delay="delay" @endGame="endGame"/>
-  <p v-if="showResults">Reaction time: {{ score }}</p>
+  <div>
+    <h1>Reacton Timer</h1>
+    <button @click="start" :disabled="isPlaying">PLAY!</button>
+    <Block v-if="isPlaying" :delay="delay" @endGame="endGame"/>
+    <Results v-if="showResults" :score="score"/>
+  </div>
 </template>
 
 <script>
 import Block from './components/Block.vue'
+import Results from './components/Results.vue'
 
 
 export default {
-  components: { Block },
+  components: { Block, Results },
   data() {
     return {
       isPlaying: false,
@@ -31,6 +34,11 @@ export default {
       this.isPlaying = false
       console.log(this.score);
       this.showResults = true
+    },
+    retardedDetected() {
+      if(this.isPlaying) {
+        this.start()
+      }
     }
   }
 }
